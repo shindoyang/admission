@@ -1,0 +1,274 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录 - 用户中心</title>
+    <link rel="icon" href="./images/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="login.css" />
+</head>
+
+<body>
+    <div id="root">
+        <div class="UserLayout__container___1qll8">
+            <div class="UserLayout__content___1xAM2">
+                <div class="UserLayout__top___dAPWE">
+                    <div class="UserLayout__header___3xyac">
+                        <a href="#/">
+                            <span class="UserLayout__title___2SlIy">优特用户中心</span>
+                        </a>
+                    </div>
+                    <div class="UserLayout__desc___1uABx">优特智厨用户中心</div>
+                </div>
+                <div class="Login__main___3vXQQ">
+                    <div class="Login__banner___dDx0H"></div>
+                    <div class="index__login___1MW8J">
+                        <form class="ant-form ant-form-horizontal" action="/uaa/authentication/mobile" method="post" id="mobileLoginForm">
+                            <div>
+                                <div class="ant-tabs ant-tabs-top index__tabs___1ljDi ant-tabs-line ant-tabs-no-animation">
+                                    <div role="tablist" class="ant-tabs-bar" tabindex="0">
+                                        <div class="ant-tabs-nav-container">
+                                            <div class="ant-tabs-nav-wrap">
+                                                <div class="ant-tabs-nav-scroll">
+                                                    <div class="ant-tabs-nav ant-tabs-nav-animated">
+                                                        <div>
+                                                            <div role="tab" aria-disabled="false" aria-selected="false" class="ant-tabs-tab"><a class="register___2JZTi" href="/uaa/login.html" style="color:silver">账户密码登录</a></div>
+                                                            <div role="tab" aria-disabled="false" aria-selected="true" class="ant-tabs-tab ant-tabs-tab-active">手机注册并登录</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ant-tabs-content ant-tabs-content-no-animated">
+                                        <div role="tabpanel" aria-hidden="false" class="ant-tabs-tabpane ant-tabs-tabpane-active">
+                                            <div class="ant-row ant-form-item">
+                                                <div class="ant-form-item-control-wrapper">
+                                                    <div class="ant-form-item-control">
+                                                        <span class="ant-form-item-children">
+                                                            <span class="ant-input-affix-wrapper ant-input-affix-wrapper-lg">
+                                                                <span class="ant-input-prefix">
+                                                                    <i class="anticon anticon-mobile index__prefixIcon___5euWy"></i>
+                                                                </span>
+                                                                <input placeholder="手机号" type="text" id="mobile" name="mobile" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input ant-input-lg"
+                                                                    value="">
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ant-row ant-form-item">
+                                                <div class="ant-form-item-control-wrapper">
+                                                    <div class="ant-form-item-control">
+                                                        <span class="ant-form-item-children">
+                                                            <div class="ant-row" style="margin-left: -4px; margin-right: -4px;">
+                                                                <div class="ant-col-16" style="padding-left: 4px; padding-right: 4px;">
+                                                                    <span class="ant-input-affix-wrapper ant-input-affix-wrapper-lg">
+                                                                        <span class="ant-input-prefix">
+                                                                            <i class="anticon anticon-text index__prefixIcon___5euWy"></i>
+                                                                        </span>
+                                                                        <input placeholder="验证码" type="text" id="captcha" name="smsCode" data-__meta="[object Object]" data-__field="[object Object]" class="ant-input ant-input-lg"
+                                                                            value="">
+                                                                    </span>
+                                                                </div>
+                                                                <div class="ant-col-8" style="padding-left: 4px; padding-right: 4px;">
+                                                                    <input type="hidden" id="messageId" name="messageId">
+                                                                    <input type="hidden" id="type" name="type" value="mobile">
+                                                                    <input type="hidden" id="appPrefix" name="appPrefix" value="orderApp">
+                                                                    <button type="button" class="ant-btn index__getCaptcha___3Cf6X ant-btn-lg" id = "numbtn"> <!--onclick="sendSmsCode()"-->
+                                                                        <span>获取验证码</span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <span id = "errorMsg" style="color:red;font-size:15px;"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div> -->
+                                    <!-- <label class="ant-checkbox-wrapper">
+                                        <span class="ant-checkbox ant-checkbox-checked">
+                                            <input type="checkbox" class="ant-checkbox-input" value="">
+                                            <span class="ant-checkbox-inner"></span>
+                                        </span>
+                                        <span>自动登录</span>
+                                    </label> -->
+                                    <!--<a class="Login__reset___1Z2kw" href="#/user/reset">忘记密码</a>-->
+                                <!-- </div> -->
+                                <div class="ant-row ant-form-item">
+                                    <div class="ant-form-item-control-wrapper">
+                                        <div class="ant-form-item-control">
+                                            <span class="ant-form-item-children">
+                                                <!--<button type="submit" class="ant-btn index__submit___3bWpy ant-btn-primary ant-btn-lg">
+                                                    <span>登 录</span>
+                                                </button>-->
+                                                <button type="button" class="ant-btn index__submit___3bWpy ant-btn-primary ant-btn-lg" onclick="checkAndSubmit()">
+                                                    <span>登 录</span>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="other___18xgm">
+                                    <span>其他登录方式</span>
+                                    <i class="anticon anticon-WECHAT icon___3BaVm"></i>
+                                    <!--<i class="anticon anticon-QQ icon___3BaVm"></i>-->
+                                    <!--<i class="anticon anticon-WEIBO icon___3BaVm"></i>-->
+                                    <!--<a class="register___2JZTi" href="/uaa/register.html">注册账户</a>-->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="index__globalFooter___1W2x2">
+                <div class="index__links___1TMBe">
+                    <a target="_self" href="">帮助</a>
+                    <a target="_self" href="">隐私</a>
+                    <a target="_self" href="">条款</a>
+                </div>
+                <div class="index__copyright___3hvsv">Copyright
+                    <i class="anticon anticon-copyright"></i> 2018优特智厨</div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="./lib/jquery.min.js"></script>
+    <script type="text/javascript" src="login.js"></script>
+    <script type="text/javascript">
+        //监听回车事件
+        document.onkeyup = function (e) {
+            if (window.event)//如果window.event对象存在，就以此事件对象为准
+                e = window.event;
+            var code = e.charCode || e.keyCode;
+            if (code == 13) {
+                checkAndSubmit();
+            }
+        }
+
+        // 获取验证码倒计时
+        var countdown = 60;
+        $('#numbtn').on('click',function(){
+            var obj = $("#numbtn");
+            if(checkParam()){
+                $("#errorMsg").html('');
+                sendSmsCode(function() {
+                    settime(obj);
+                });
+            }
+        })
+
+        //设置时间
+        function settime(obj) { //发送验证码倒计时
+            if (countdown == 0) {
+                obj.attr('disabled', false);
+                //obj.removeattr("disabled");
+                obj.html("获取验证码");
+                countdown = 60;
+                return;
+            } else {
+                obj.attr('disabled', true);
+                obj.html("重新发送(" + countdown + ")");
+                countdown--;
+            }
+
+            setTimeout(function () {
+                    settime(obj)
+                }
+                , 1000)
+        }
+
+        //检查参数
+        function checkParam() {
+            var mobile = $("#mobile").val();
+            if(mobile == ""){
+                $("#errorMsg").html('请先输入手机号！');
+                return false;
+            }
+            return true;
+        }
+
+        //发送验证码
+        function sendSmsCode(callback){
+            var mobile = $("#mobile").val();
+            $.ajax({
+                async:false,
+                url: "/uaa/public/sendVerifyCode?appPrefix=orderApp&mobile="　+ mobile,
+                //data:JSON.stringify(user),
+                contentType:'application/json',
+                type:'PUT',
+                success: function(data){
+                    var re = JSON.parse(data);
+                    if(re.code===0){
+                        callback && callback();
+                        $("#messageId").val(re.msg);
+                        // $("#errorMsg").html('验证码发送成功');
+                    }
+                    if(re.code===1){
+                        $("#errorMsg").html(re.msg);
+                    }
+                    // window.location.href= oauthUrl + "/uaa/login.html";
+                },
+                error: function(data){//XMLHttpRequest, textStatus, errorThrown
+                    // alert("错误信息：" + XMLHttpRequest.responseText);
+                    $("#errorMsg").html('获取验证码失败，请稍后重试');
+                    return ;
+                }
+            });
+        }
+
+        function checkAndSubmit() {
+            var mobile = $("#mobile").val();
+            var smsCode = $("#captcha").val();
+            var messageId = $("#messageId").val();
+
+            if (mobile == "") {
+                $("#errorMsg").html('手机号不能为空');
+                return;
+            }
+            if (smsCode == "") {
+                $("#errorMsg").html('验证码不能为空');
+                return;
+            }
+            if (messageId == "") {
+                $("#errorMsg").html('请先获取验证码！');
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "login/checkMobileLoginParam",
+                data: {
+                    "mobile": mobile,
+                    "messageId": messageId,
+                    "smsCode": smsCode,
+                    "appPrefix": "orderApp"
+                },
+                success: function (data) {
+                    var ajaxobj=eval("("+data+")");
+                    if("0" == ajaxobj.code){
+                        var form = document.getElementById("mobileLoginForm");
+                        form.submit();
+                    }else{
+                        $("#errorMsg").html(ajaxobj.msg);
+                    }
+                    /*setTimeout(function () {
+                     location.href = 'index.html';
+                     }, 1500);*/
+                },
+                error: function (data) {
+                    console.log(data);
+                    $("#errorMsg").html("网络请求异常");
+                }
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

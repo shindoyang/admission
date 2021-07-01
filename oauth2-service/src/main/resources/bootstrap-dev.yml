@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: oauth2-service
+  cloud:
+    zookeeper:
+      connect-string: dev-zookeeper.dev:2181
+      discovery:
+        instance-host: ${spring.cloud.client.ip-address}
+        enabled: false
+      enabled: false
+    config:
+      enabled: false
+  thymeleaf:
+    cache: false
+  freemarker:
+     allow-request-override: false
+     allow-session-override: false
+     cache: true
+     charset: UTF-8
+     check-template-location: true
+     content-type: text/html
+     enabled: true
+     expose-request-attributes: false
+     expose-session-attributes: false
+     expose-spring-macro-helpers: true
+     prefer-file-system-access: true
+     suffix: .ftl
+     template-loader-path: classpath:/templates/
+  #全链路跟踪
+  zipkin:
+    base-url: http://dev-zipkin.dev:9411/
+    service:
+      name: ${spring.application.name}
+    enabled: true
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1.0
+
+server:
+  port: 19005
+  servlet:
+    context-path: /uaa
+    session:
+      timeout: 14400 #单位：秒   4小时
+
+logging:
+  config: classpath:log/logback-dev.xml
+
+login:
+  success:
+    redirectUrl: https://dev.utcook.com/developer-center/
+
+platform:
+  service-url:
+    #基础平台
+    user: http://user-service.dev:19006
+    util: http://util-service.dev:19109

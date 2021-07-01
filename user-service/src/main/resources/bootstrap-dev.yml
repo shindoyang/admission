@@ -1,0 +1,104 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+    zookeeper:
+      connect-string: dev-zookeeper.dev:2181
+      discovery:
+        enabled: false
+        instance-host: ${spring.cloud.client.ip-address}
+      enabled: false
+  application:
+    name: user-service
+  #全链路跟踪
+  zipkin:
+    base-url: http://dev-zipkin.dev:9411/
+    service:
+      name: ${spring.application.name}
+    enabled: true
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1.0
+
+  datasource:
+    url: jdbc:mysql://dev-mysql-mysqlha-master.dev:3306/oauth?characterEncoding=utf8
+    username: user
+    password: dev@ut.cn
+    druid:
+      max-wait: 30000
+      query-timeout: 10
+      validation-query: SELECT 1
+      use-global-data-source-stat: true
+      # 默认开启，当前已开启
+      stat:
+        log-slow-sql: true
+        slow-sql-millis: 1000
+      # 默认关闭，需手动开启，当前已开启
+      slf4j:
+        enabled: true
+        data-source-log-enabled: false
+        connection-log-enabled: false
+        statement-log-enabled: false
+        result-set-log-enabled: false
+      # 默认关闭，需手动开启，当前已开启
+      wall:
+        enabled: true
+        log-violation: true
+        throw-exception: false
+        config:
+          delete-where-none-check: true
+      # 默认关闭，需手动开启，当前已关闭
+      config:
+        enabled: false
+      # 默认关闭，需手动开启，当前已关闭
+      web-stat:
+        enabled: false
+      # 默认关闭，需手动开启，当前已关闭
+      aop-stat:
+        enabled: false
+      # 默认关闭，需手动开启，当前已关闭
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        reset-enable: true
+        login-password: 123456
+  redis:
+    host: dev-redis-redis
+    port: 6379
+    database: 2
+    password:
+    timeout: 10000
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        min-idle: 0
+        max-idle: 8
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+    generate-ddl: false
+server:
+  port: 19006
+  max-http-header-size: 15000 # header长度阀值
+
+logging:
+  config: classpath:log/logback-dev.xml
+
+oauth2:
+  login:
+    url: https://oauthdev.utcook.com/uaa/oauth/login
+
+platform:
+  service-url:
+    #基础平台
+    file: http://file-service.dev:19103
+    util: http://util-service.dev:19109

@@ -1,0 +1,8 @@
+app:
+  id: user-service1
+apollo:
+  bootstrap:
+    enabled: true
+    namespaces: user.yml
+    eagerLoad:
+      enabled: false

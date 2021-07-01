@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button type="button" onclick="wechatAuth()">微信绑定</button>
+<button type="button" onclick="unbind()">微信解绑</button>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+
+    //    -------------------监听微信授权回调 start-------------------
+    $(function () {
+        var currentUrl = window.location.href;
+        var args = currentUrl.split("?");
+        if (args.length > 1) {
+            GetArgsFromHref(args[1]);
+        }
+    });
+
+    function GetArgsFromHref(param) {
+        var code, state, uKey;
+        var str = param;
+        args = str.split("&");
+        for (var i = 0; i < args.length; i++) {
+            str = args[i];
+            var arg = str.split("=");
+            if (arg.length <= 1) continue;
+            if (arg[0] == "code") {
+                code = arg[1];
+            }
+            else if (arg[0] == "state") {
+                state = arg[1];
+            }
+            else if (arg[0] == "uKey") {
+                uKey = arg[1];
+            }
+        }
+        applyBindingFilter(code, state, uKey, "wx270141be46ea2111");
+    }
+
+    function applyBindingFilter(code, state, uKey, appKey) {
+        var bindingUrl = getUrlPrefix() + "/uaa/wechat/binding?code=" + code + "&state=" + state + "&uKey=" + uKey + "&appKey=" + appKey;
+        window.location.href = bindingUrl;
+    }
+
+    function unbind() {
+        var unbindUrl = getUrlPrefix() + "/uaa/unbindThirdAccount?thirdAccountType=wechat";
+        $.ajax({
+            type: "DELETE",
+            url: unbindUrl,
+            success: function (data) {
+                console.log(data)
+            },
+            error: function (data) {
+                console.log(data);
+                $("#errorMsg").html("网络请求异常");
+            }
+        });
+    }
+
+    function wechatAuth() {
+        var oauthUrl = getUrlPrefix() + "/uaa/authUrl?appKey=wx270141be46ea2111&thirdAccountType=wechat&redirectUrl=https://" + document.domain + "/uaa/callback.html";
+        console.log(oauthUrl)
+        $.ajax({
+            type: "GET",
+            url: oauthUrl,
+            success: function (data) {
+                window.location.href = data
+            },
+            error: function (data) {
+                console.log(data);
+                $("#errorMsg").html("网络请求异常");
+            }
+        });
+    }
+
+    function getUrlPrefix() {
+        var host = document.domain;
+        var url = "";
+        if ("192.168.75.225" == host || "192.168.75.237" == host || "192.168.105.72" == host || host.substr(0, 3) == "dev") {
+            url = "http://" + host + ":19005";
+        }
+        if (host.substr(0, 5) == "oauth" || host.substr(0, 8) == "oauthuat" || host.substr(0, 8) == "oauthdev") {
+            url = "https://" + host;
+        }
+        return url;
+    }
+
+
+</script>
+</body>
+</html>

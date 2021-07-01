@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>regist</title>
+
+</head>
+<body>
+<h1 />
+<div>
+    <!-- <img alt="这是图片" src="/img/001.png"/> -->
+    <img alt="验证码" onclick = "this.src='/verifycode/public/verifycation'" src="/verifycode/public/verifycation" />
+</div>
+<form action="/user/public/register", method="post">
+    <input type="text" name="verifyCode" />
+    <input type="submit" value="提交"/>
+</form>
+
+</body>
+</html>

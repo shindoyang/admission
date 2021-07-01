@@ -1,0 +1,8 @@
+app:
+  id: oauth2-service1
+apollo:
+  bootstrap:
+    enabled: true
+    namespaces: oauth2.yml
+    eagerLoad:
+      enabled: false

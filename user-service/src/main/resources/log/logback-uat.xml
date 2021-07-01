@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="CONSOLE_LOG_PATTERN"
+              value="%green(%d{yyyy-MM-dd HH:mm:ss}) %highlight(%-5level) %yellow([%thread]) - %cyan(%logger) - %(%msg%n)"/>
+
+    <!-- 输出到控制台 -->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <!-- logstash服务地址 -->
+        <destination>192.168.105.73:4560</destination>
+        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">
+            <!-- 日志自定义字段，随日志内容一起进行存储，方便在日志查看端kibana中按此字段进行检索 -->
+            <customFields>{"projectName":"uat-user-service"}</customFields>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="LOGSTASH"/>
+    </root>
+</configuration>

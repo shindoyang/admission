@@ -1,0 +1,77 @@
+localhost: 123.57.131.180
+apollo:
+  bootstrap:
+    enabled: false
+spring:
+  application:
+    name: oauth2-service
+  cloud:
+    zookeeper:
+      connect-string: ${localhost}:2181
+      discovery:
+        instance-host: ${spring.cloud.client.ip-address}
+        enabled: true
+    config:
+      enabled: false
+  thymeleaf:
+    cache: false
+  freemarker:
+     allow-request-override: false
+     allow-session-override: false
+     cache: true
+     charset: UTF-8
+     check-template-location: true
+     content-type: text/html
+     enabled: true
+     expose-request-attributes: false
+     expose-session-attributes: false
+     expose-spring-macro-helpers: true
+     prefer-file-system-access: true
+     suffix: .ftl
+     template-loader-path: classpath:/templates/
+  #全链路跟踪
+  zipkin:
+    base-url: http://localhost:9411/
+    service:
+      name: ${spring.application.name}
+    enabled: true
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1.0
+  oauth2:
+    client:
+      validity_seconds:
+        access_token: 2592000 # 60 * 60 * 24 * 30 = 30天
+        refresh_token: 2592000 # 30天  2592000
+      refresh_token:
+        reuse: false
+
+server:
+  port: 19005
+  servlet:
+    context-path: /uaa
+    session:
+      timeout: 14400 #单位：秒   4小时
+
+logging:
+  config: classpath:log/logback-local.xml
+
+login:
+  success:
+    redirectUrl: http://127.0.0.1:19005/uaa/swagger-ui.html
+
+
+#如果路由方式是serviceId的方式，那么ribbon的生效
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 250000
+
+platform:
+  service-url:
+    #基础平台
+    user:
+    util:

@@ -1,0 +1,96 @@
+# This file is a template, and might need editing before it works on your project.
+
+image: reg.utcook.com/pub/k8s-alpine:v1.13.0
+
+# 注释的变量使用默认值，否则为未定义
+# 具体请查看下文include所在项目文件
+variables:
+  # TRACE: "true"
+  # AUTO_DEVOPS_DOMAIN: "utcook.com"
+  # KUBERNETES_VERSION: "1.13.1"
+  DEV_NAMESPACE: "dev"  # 各环境namespace
+  # UAT_NAMESPACE: "uat"
+  # PROD_NAMESPACE: "prod"
+  # HELM_VERSION: "2.11.0"
+  # HELM_REPO: "https://reg.utcook.com/chartrepo/pub"
+  # HELM_REPO_NAME: "utcook"
+  # HELM_HOST: "tiller-deploy.kube-system:44134"
+
+  # CHART_NAME: "utcook"  # chart模板名
+  # CHART_VERSION: "1.1.0"  # chart模板版本
+  # CONTAINER_REPO: "reg.utcook.com"  # 上传docker仓库
+  # CONTAINER_PROJECT: "pub"  # docker仓库项目
+  DOCKER_HOST: "192.168.105.71:2375"
+  DOCKER_USER: "docker"
+  DOCKER_PASSWD: "Dev12345"
+  DOCKER_DRIVER: "overlay2"
+  # NEXUS_USER: "admin"
+  # NEXUS_PASSWD: ""
+  # SONAR_URL: "https://sonar.utcook.com"
+  # SONAR_TOKEN: "7be72717a14d30f0d243e4b80803d81b959113a4"
+  # MAVEN_HOST: https://nexus.utcook.com
+  # MVN_OPTION: ""
+  DOCKER_BUILD: "true"  # 添加注释或者设置为false，不进行docker build
+  UAT_ENABLED: "false"  # 添加注释或者设置为false,不部署uat环境
+  STAGING_ENABLED: "true"  # 添加注释或者设置为false,不部署dev环境
+  REVIEW_DISABLED: "true"  # 设置为true,不部署review环境
+  ZAPROXY_DISABLED: "true"  # 设置为true,不进行zaproxy扫描
+  TEST_DISABLED: "false"  # 设置为true,不进行test任务
+  CODE_QUALITY_DISABLED: "true"  # 取消注释，并设置为true，不进行代码质量扫描
+
+  # POD个数
+  REPLICAS: "1"  # 默认为1
+  UAT_REPLICAS: "1"
+
+  # ci根目录，即此目录以下的项目为maven测试项目
+  #  CI_ROOT_DIR: "/"
+  # 要进行ci的项目目录名，空格隔开，不定义，默认为所有目录
+  # CI_ROOT_DIR: "/"  时，CI_PROJECTS内目录可使用绝对路径
+  # CI_PROJECTS: "/a/mytest /b/mytest2"
+#  CI_PROJECTS: "mytest mytest2"
+
+
+build:
+  stage: build
+  coverage: '/Total.*?([0-9]{1,3})%/'
+  image: reg.utcook.com/pub/maven:3.6.0-jdk-8-alpine
+  script:
+    - setup_docker
+    - build
+  only:  # 执行条件
+    refs:
+      - tags  # 打了tag时触发
+      - branches  # 分支有提交时触发
+
+# # job覆盖include中的，需要提供完整的job
+# # 设置 STAGING_ENABLED 决定是否执行此job
+staging:
+  stage: staging
+  script:
+    - check_kube_domain
+    - install_dependencies
+    - download_chart
+    - ensure_namespace $DEV_NAMESPACE
+    - initialize_tiller
+    - create_secret $DEV_NAMESPACE
+    - deploy $DEV_NAMESPACE
+  environment:
+    name: staging
+    url: http://dev.utcook.com
+  only:
+    refs:
+      - version-1.5.1  # 默认master才会自动部署，若需要其它分支部署，请打开此段注释并在此处设置你的分支名
+    kubernetes: active
+    variables:
+      - $STAGING_ENABLED == "true"
+
+
+include:
+  # 变量、流水线定义于此
+  - project: 'pub/ci-templates'
+    ref: master
+    file: 'all/base-gitlab-ci.yml'
+  # shell各函数定义于此
+  - project: 'pub/ci-templates'
+    ref: master
+    file: 'multi-maven/shell-functions-gitlab-ci.yml'

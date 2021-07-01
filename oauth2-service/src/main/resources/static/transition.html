@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>请稍后</title>
+</head>
+<body>
+<div>
+     微信验证已通过，正在进入访问的资源......
+
+    <form  style="display: none" action="/uaa/authentication/submitLogin" method="post">
+        <div class="form_text_ipt">
+            <input name="type" id="type" type="text" placeholder="登录类型" value="wechatcode">
+        </div>
+        <div class="form_text_ipt">
+            <input name="code" id="code" type="text" placeholder="授权码" value="">
+        </div>
+        <div class="form_btn">
+            <button type="submit">登录</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="./lib/jquery.min.js"></script>
+<script type="text/javascript" src="transition.js"></script>
+</body>
+</html>
