@@ -1,6 +1,6 @@
 package com.ut.security.feign;
 
-import com.ut.security.UtFeignExceptionConfiguration;
+import com.ut.security.config.UtFeignExceptionConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

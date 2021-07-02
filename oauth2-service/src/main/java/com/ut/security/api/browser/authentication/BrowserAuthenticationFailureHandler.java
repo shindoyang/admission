@@ -1,7 +1,7 @@
 package com.ut.security.api.browser.authentication;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ut.security.support.ResultResponse;
+import com.ut.security.config.ResultResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

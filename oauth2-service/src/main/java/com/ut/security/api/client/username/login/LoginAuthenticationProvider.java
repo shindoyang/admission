@@ -1,8 +1,8 @@
 package com.ut.security.api.client.username.login;
 
 import com.google.common.base.Strings;
-import com.ut.security.support.SpringUtils;
 import com.ut.security.utils.MD5Utils;
+import com.ut.security.utils.SpringUtils;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;

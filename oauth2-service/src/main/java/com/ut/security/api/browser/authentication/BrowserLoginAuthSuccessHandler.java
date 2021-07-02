@@ -2,7 +2,7 @@ package com.ut.security.api.browser.authentication;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.ut.security.support.ResultResponse;
+import com.ut.security.config.ResultResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;

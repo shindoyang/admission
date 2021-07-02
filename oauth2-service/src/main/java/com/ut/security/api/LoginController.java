@@ -2,9 +2,9 @@ package com.ut.security.api;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.base.Strings;
-import com.ut.security.support.AES_ECB_128_Service;
-import com.ut.security.support.ResultResponse;
-import com.ut.security.support.SmsService;
+import com.ut.security.config.ResultResponse;
+import com.ut.security.service.AES_ECB_128_Service;
+import com.ut.security.service.SmsService;
 import com.ut.security.usermgr.MyUserEntity;
 import com.ut.security.usermgr.MyUserService;
 import org.slf4j.Logger;

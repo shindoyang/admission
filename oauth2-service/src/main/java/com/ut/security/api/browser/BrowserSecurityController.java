@@ -1,7 +1,7 @@
 package com.ut.security.api.browser;
 
+import com.ut.security.config.ResultResponse;
 import com.ut.security.constant.SecurityConstants;
-import com.ut.security.support.ResultResponse;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

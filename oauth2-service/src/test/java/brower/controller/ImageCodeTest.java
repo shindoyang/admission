@@ -2,7 +2,7 @@ package brower.controller;
 
 import brower.util.HttpHelper;
 import com.ut.security.OAuth2ServiceApp;
-import com.ut.security.support.ResultResponse;
+import com.ut.security.config.ResultResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;

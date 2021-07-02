@@ -3,10 +3,10 @@ package com.ut.security.api.browser.username.login;
 
 import com.google.common.base.Strings;
 import com.ut.security.constant.SecurityConstants;
-import com.ut.security.support.AES_ECB_128_Service;
-import com.ut.security.support.SpringUtils;
+import com.ut.security.service.AES_ECB_128_Service;
 import com.ut.security.usermgr.MyUserEntity;
 import com.ut.security.usermgr.MyUserService;
+import com.ut.security.utils.SpringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationServiceException;
