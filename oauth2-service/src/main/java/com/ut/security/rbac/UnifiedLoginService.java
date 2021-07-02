@@ -1,6 +1,6 @@
 package com.ut.security.rbac;
 
-import com.ut.security.properties.SecurityConstants;
+import com.ut.security.constant.SecurityConstants;
 import com.ut.security.support.AES_ECB_128_Service;
 import com.ut.security.support.SmsService;
 import com.ut.security.usermgr.MyUserEntity;

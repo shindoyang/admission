@@ -1,10 +1,10 @@
 package com.ut.security;
 
-import com.ut.security.authorize.AuthorizeConfigManager;
-import com.ut.security.browser.username.login.UsernameLoginAuthenticationFilter;
-import com.ut.security.browser.username.login.UsernameLoginAuthenticationProvider;
-import com.ut.security.client.username.login.LoginAuthenticationSecurityConfig;
-import com.ut.security.properties.SecurityConstants;
+import com.ut.security.api.browser.username.login.UsernameLoginAuthenticationFilter;
+import com.ut.security.api.browser.username.login.UsernameLoginAuthenticationProvider;
+import com.ut.security.api.client.username.login.LoginAuthenticationSecurityConfig;
+import com.ut.security.config.authorize.AuthorizeConfigManager;
+import com.ut.security.constant.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

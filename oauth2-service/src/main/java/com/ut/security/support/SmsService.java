@@ -1,19 +1,15 @@
 package com.ut.security.support;
 
-import com.alibaba.fastjson.JSON;
 import com.google.common.base.Strings;
+import com.ut.security.constant.SecurityConstants;
 import com.ut.security.feign.FeignSmsService;
 import com.ut.security.feign.FeignUserService;
-import com.ut.security.properties.SecurityConstants;
 import com.ut.security.utils.MD5Utils;
-import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-
-import java.security.NoSuchAlgorithmException;
 
 @Component
 @Slf4j

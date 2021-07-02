@@ -1,7 +1,7 @@
 package com.ut.security.vo;
 
-import com.ut.security.authritymgr.AuthorityEntity;
-import com.ut.security.authritymgr.AuthorityGroupEntity;
+import com.ut.security.model.AuthorityEntity;
+import com.ut.security.model.AuthorityGroupEntity;
 import lombok.Data;
 
 import javax.persistence.Transient;

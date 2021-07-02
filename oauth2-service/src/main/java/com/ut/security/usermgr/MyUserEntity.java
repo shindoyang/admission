@@ -1,8 +1,8 @@
 package com.ut.security.usermgr;
 
 
-import com.ut.security.authritymgr.AuthorityEntity;
-import com.ut.security.authritymgr.AuthorityGroupEntity;
+import com.ut.security.model.AuthorityEntity;
+import com.ut.security.model.AuthorityGroupEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;

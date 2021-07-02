@@ -1,10 +1,10 @@
 package com.ut.security.service;
 
 import com.google.common.base.Strings;
+import com.ut.security.constant.ExceptionContants;
+import com.ut.security.constant.UserConstants;
 import com.ut.security.dao.AppDao;
 import com.ut.security.model.AppEntity;
-import com.ut.security.properties.ExceptionContants;
-import com.ut.security.properties.UserConstants;
 import com.ut.security.usermgr.MyUserDao;
 import com.ut.security.usermgr.MyUserEntity;
 import com.ut.security.usermgr.MyUserService;
