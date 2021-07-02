@@ -1,4 +1,4 @@
-package com.ut.security.controller;
+package com.ut.security.api;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;

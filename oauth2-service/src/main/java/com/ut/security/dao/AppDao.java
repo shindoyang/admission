@@ -1,5 +1,6 @@
-package com.ut.security.appmgr;
+package com.ut.security.dao;
 
+import com.ut.security.model.AppEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

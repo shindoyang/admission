@@ -1,4 +1,4 @@
-package com.ut.security.controller;
+package com.ut.security.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;

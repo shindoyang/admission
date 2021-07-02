@@ -1,6 +1,8 @@
-package com.ut.security.appmgr;
+package com.ut.security.service;
 
 import com.google.common.base.Strings;
+import com.ut.security.dao.AppDao;
+import com.ut.security.model.AppEntity;
 import com.ut.security.properties.ExceptionContants;
 import com.ut.security.properties.UserConstants;
 import com.ut.security.usermgr.MyUserDao;

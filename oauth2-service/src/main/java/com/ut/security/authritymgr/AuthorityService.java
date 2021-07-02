@@ -1,9 +1,9 @@
 package com.ut.security.authritymgr;
 
 import com.google.common.base.Strings;
-import com.ut.security.appmgr.AppService;
 import com.ut.security.properties.ExceptionContants;
 import com.ut.security.properties.UserConstants;
+import com.ut.security.service.AppService;
 import com.ut.security.usermgr.*;
 import com.ut.security.vo.AuthorityInVo;
 import org.springframework.beans.BeanUtils;

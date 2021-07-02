@@ -1,4 +1,4 @@
-package com.ut.security.appmgr;
+package com.ut.security.model;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
