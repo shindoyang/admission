@@ -56,6 +56,7 @@ public class WebSecurityCfg extends WebSecurityConfigurerAdapter {
 						"/login/**",
 						"/authUrl/**",
 						"/local/**",
+						"/**/oauth/**",
 						"/authentication/**",
 						"/**/login.html",
 						"/**/index.html",

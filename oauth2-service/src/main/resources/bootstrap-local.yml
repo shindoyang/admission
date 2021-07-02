@@ -115,6 +115,8 @@ server:
 
 logging:
   config: classpath:log/logback-local.xml
+  level:
+    root: info
 
 login:
   success:

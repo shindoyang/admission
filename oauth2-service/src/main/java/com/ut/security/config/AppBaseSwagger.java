@@ -28,7 +28,7 @@ public class AppBaseSwagger {
 				// base，最终调用接口后会和paths拼接在一起
 				.pathMapping("/")
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.ut.security.controller"))
+				.apis(RequestHandlerSelectors.basePackage("com.ut.security.api"))
 				//过滤的接口
 				.paths((regex("/*.*")))
 				.build()
