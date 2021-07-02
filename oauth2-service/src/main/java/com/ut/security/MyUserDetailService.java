@@ -1,10 +1,10 @@
 package com.ut.security;
 
-import com.ut.security.feign.FeignUserService;
 import com.ut.security.rbac.MyAuthoritiesService;
-import com.ut.security.rbac.MyUserEntity;
 import com.ut.security.rbac.UnifiedLoginService;
 import com.ut.security.support.AES_ECB_128_Service;
+import com.ut.security.usermgr.MyUserEntity;
+import com.ut.security.usermgr.MyUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MyUserDetailService implements UserDetailsService {
 	@Autowired
-	FeignUserService feignUserService;
+	MyUserService myUserService;
 	@Autowired
 	UnifiedLoginService unifiedLoginService;
 	@Autowired
@@ -37,7 +37,7 @@ public class MyUserDetailService implements UserDetailsService {
 			loginUser = unifiedLoginService.unifiedLogin(principal);
 
 		if (principal.split(",").length == 1)//自定义过滤链使用
-			loginUser = feignUserService.getUserByUid(principal, aes_ecb_128_service.getSecurityToken());
+			loginUser = myUserService.getUserByUid(principal);
 
 		if(null == loginUser)
 			throw new UsernameNotFoundException(principal + " 用户未注册！");

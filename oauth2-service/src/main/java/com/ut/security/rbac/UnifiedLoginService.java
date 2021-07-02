@@ -1,9 +1,10 @@
 package com.ut.security.rbac;
 
-import com.ut.security.feign.FeignUserService;
 import com.ut.security.properties.SecurityConstants;
 import com.ut.security.support.AES_ECB_128_Service;
 import com.ut.security.support.SmsService;
+import com.ut.security.usermgr.MyUserEntity;
+import com.ut.security.usermgr.MyUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,7 +21,7 @@ public class UnifiedLoginService {
     @Autowired
     private SmsService smsService;
     @Autowired
-    private FeignUserService feignUserService;
+    private MyUserService myUserService;
     @Autowired
     PasswordEncoder passwordEncoder;
     @Autowired
@@ -42,7 +43,7 @@ public class UnifiedLoginService {
             String smsCode = principal.split(",")[3];
             String appPrefix = principal.split(",")[4];
 
-            loginUser = feignUserService.getUserByMobile(mobile, aes_ecb_128_service.getSecurityToken());
+            loginUser = myUserService.getUserByMobile(mobile);
 
             if (SecurityConstants.LOGIN_TYPE_APP_MOBILE_REGISTER.equals(loginType) && null != loginUser)
                 throw new BadCredentialsException(mobile + " 用户已注册！");
@@ -53,7 +54,7 @@ public class UnifiedLoginService {
             smsService.checkSmsCode(loginType, mobile, messageId, smsCode, appPrefix);
 
             if (SecurityConstants.LOGIN_TYPE_APP_MOBILE_REGISTER.equals(loginType))
-                loginUser = feignUserService.mobileRegister(mobile, aes_ecb_128_service.getSecurityToken());
+                loginUser = myUserService.mobileRegister(mobile);
         }
         return loginUser;
     }

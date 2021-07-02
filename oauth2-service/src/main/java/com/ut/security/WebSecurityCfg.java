@@ -3,16 +3,7 @@ package com.ut.security;
 import com.ut.security.authorize.AuthorizeConfigManager;
 import com.ut.security.browser.username.login.UsernameLoginAuthenticationFilter;
 import com.ut.security.browser.username.login.UsernameLoginAuthenticationProvider;
-import com.ut.security.browser.username.register.ImageCodeAuthenticationSecurityConfig;
-import com.ut.security.browser.sms.SmsCodeAuthenticationSecurityConfig;
-import com.ut.security.browser.wechat.WechatLoginAuthenticationSecurityConfig;
-import com.ut.security.client.miniprogram.login.MiniProgramAuthenticationSecurityConfig;
-import com.ut.security.client.miniprogram.register.MiniProgramRegisterAuthenticationSecurityConfig;
-import com.ut.security.client.sms.login.SmsLoginAuthenticationSecurityConfig;
-import com.ut.security.client.sms.register.SmsRegisterAuthenticationSecurityConfig;
 import com.ut.security.client.username.login.LoginAuthenticationSecurityConfig;
-import com.ut.security.client.username.register.RegisterAuthenticationSecurityConfig;
-import com.ut.security.client.wechat.WechatAppLoginAuthenticationSecurityConfig;
 import com.ut.security.properties.SecurityConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -42,26 +33,7 @@ public class WebSecurityCfg extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private AuthenticationSuccessHandler browserLoginAuthSuccessHandler;
 	@Autowired
-	private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
-	@Autowired
-	private ImageCodeAuthenticationSecurityConfig imageCodeAuthenticationSecurityConfig;
-	@Autowired
 	private LoginAuthenticationSecurityConfig loginAuthenticationSecurityConfig;
-	@Autowired
-	private RegisterAuthenticationSecurityConfig registerAuthenticationSecurityConfig;
-	@Autowired
-	private SmsLoginAuthenticationSecurityConfig smsLoginAuthenticationSecurityConfig;
-	@Autowired
-	private SmsRegisterAuthenticationSecurityConfig smsRegisterAuthenticationSecurityConfig;
-
-	@Autowired
-	private WechatLoginAuthenticationSecurityConfig wechatLoginSecurityConfig;
-	@Autowired
-	private WechatAppLoginAuthenticationSecurityConfig wechatAppLoginAuthenticationSecurityConfig;
-	@Autowired
-	private MiniProgramRegisterAuthenticationSecurityConfig miniProgramRegisterAuthenticationSecurityConfig;
-	@Autowired
-	private MiniProgramAuthenticationSecurityConfig miniProgramAuthenticationSecurityConfig;
 	@Autowired
 	private AuthorizeConfigManager authorizeConfigManager;
 	@Autowired
@@ -77,25 +49,7 @@ public class WebSecurityCfg extends WebSecurityConfigurerAdapter {
 				.successHandler(browserLoginAuthSuccessHandler)
 				.failureHandler(browserAuthenticationFailureHandler)
 				.and()
-				.apply(imageCodeAuthenticationSecurityConfig)//pc 图形验证码注册并登录
-				.and()
-				.apply(smsCodeAuthenticationSecurityConfig)//pc 短信验证码注册并登录
-				.and()
 				.apply(loginAuthenticationSecurityConfig)//app 用户名密码登录
-				.and()
-				.apply(registerAuthenticationSecurityConfig)//app 用户名密码注册并登录
-				.and()
-				.apply(smsRegisterAuthenticationSecurityConfig)//app 短信验证码注册并登录
-				.and()
-				.apply(smsLoginAuthenticationSecurityConfig)//app 短信验证码登录
-				.and()
-				.apply(wechatLoginSecurityConfig)		//PC端微信登录
-				.and()
-				.apply(wechatAppLoginAuthenticationSecurityConfig)	//移动端微信登录
-				.and()
-				.apply(miniProgramRegisterAuthenticationSecurityConfig)	//小程序注册
-				.and()
-				.apply(miniProgramAuthenticationSecurityConfig)	//小程序登录
 				.and()
 				.authorizeRequests()
 				.antMatchers(

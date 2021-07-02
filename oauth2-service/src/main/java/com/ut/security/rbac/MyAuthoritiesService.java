@@ -1,7 +1,8 @@
 package com.ut.security.rbac;
 
-import com.ut.security.feign.FeignUserService;
 import com.ut.security.support.AES_ECB_128_Service;
+import com.ut.security.usermgr.MyUserEntity;
+import com.ut.security.usermgr.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,21 +17,27 @@ import java.util.Set;
 public class MyAuthoritiesService {
 
     @Autowired
-    private FeignUserService feignUserService;
+    private MyUserService myUserService;
     @Autowired
     AES_ECB_128_Service aes_ecb_128_service;
 
-    public User assemblingUserDetail(MyUserEntity loginUser){
+    public User assemblingUserDetail(MyUserEntity loginUser) {
         //获取用户的所有权限
-        List<String> myAuthorities = feignUserService.getGrantedAuthorities(loginUser.getUsername(), aes_ecb_128_service.getSecurityToken());
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        if(null != myAuthorities && myAuthorities.size() > 0){
-            for(int i = 0; i < myAuthorities.size(); i++){
-                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(myAuthorities.get(i));
-                grantedAuthorities.add(grantedAuthority);
+        Set<GrantedAuthority> grantedAuthorities = null;
+        String password = null;
+        try {
+            List<String> myAuthorities = myUserService.getGrantedAuthorities(loginUser.getUsername());
+            grantedAuthorities = new HashSet<>();
+            if (null != myAuthorities && myAuthorities.size() > 0) {
+                for (int i = 0; i < myAuthorities.size(); i++) {
+                    GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(myAuthorities.get(i));
+                    grantedAuthorities.add(grantedAuthority);
+                }
             }
+            password = loginUser.getPassword() == null ? "" : loginUser.getPassword();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        String password = loginUser.getPassword() == null ? "" : loginUser.getPassword();
         return new User(loginUser.getUsername(), password, grantedAuthorities);
     }
 }

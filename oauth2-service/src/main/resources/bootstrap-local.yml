@@ -48,6 +48,7 @@ spring:
       refresh_token:
         reuse: false
 
+
   datasource:
     name: druidDataSource
     type: com.alibaba.druid.pool.DruidDataSource

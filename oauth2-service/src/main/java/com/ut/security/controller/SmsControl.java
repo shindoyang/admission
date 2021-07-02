@@ -3,9 +3,7 @@ package com.ut.security.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ut.security.feign.FeignSmsService;
-import com.ut.security.service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,8 +21,6 @@ public class SmsControl {
 
     @Autowired
     FeignSmsService feignSms;
-    @Autowired
-    AppService appService;
 
     @ApiIgnore
     @PutMapping("sendVerifyCode")
@@ -48,8 +44,4 @@ public class SmsControl {
         return JSONObject.toJSON(map).toString();
     }
 
-    @GetMapping("test")
-    public void test(String appPrefix, String mobile) throws Exception {
-        appService.createApp();
-    }
 }

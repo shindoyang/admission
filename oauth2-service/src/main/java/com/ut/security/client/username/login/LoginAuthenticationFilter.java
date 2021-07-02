@@ -1,11 +1,10 @@
 package com.ut.security.client.username.login;
 
 import com.google.common.base.Strings;
-import com.ut.security.feign.FeignUserService;
 import com.ut.security.properties.SecurityConstants;
-import com.ut.security.rbac.MyUserEntity;
-import com.ut.security.support.AES_ECB_128_Service;
 import com.ut.security.support.SpringUtils;
+import com.ut.security.usermgr.MyUserEntity;
+import com.ut.security.usermgr.MyUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -42,20 +41,19 @@ public class LoginAuthenticationFilter extends AbstractAuthenticationProcessingF
         String password = obtainParameter(request, SecurityConstants.LOGIN_PASSWORD);
         String encryption = obtainParameter(request,SecurityConstants.LOGIN_ENCRYPTION);
 
-        FeignUserService feignUserService = SpringUtils.getBean(FeignUserService.class);
-        AES_ECB_128_Service aes = SpringUtils.getBean(AES_ECB_128_Service.class);
         MyUserEntity userEntity = null;
+        MyUserService myUserService = SpringUtils.getBean(MyUserService.class);
 
         //检查用户
         if(!Strings.isNullOrEmpty(username)) {
-            userEntity = feignUserService.getUserByUsername(username, aes.getSecurityToken());
+            userEntity = myUserService.getUserByUsername(username);
             if(null == userEntity)
                 throw new AuthenticationServiceException(username + " 用户未注册！");
             if(Strings.isNullOrEmpty(userEntity.getPassword())){
                 throw  new AuthenticationServiceException("该用户未设置密码！");
             }
         }else if(!Strings.isNullOrEmpty(mobile)){
-            userEntity = feignUserService.getUserByMobile(mobile, aes.getSecurityToken());
+            userEntity = myUserService.getUserByMobile(mobile);
             if(null == userEntity)
                 throw new AuthenticationServiceException(mobile + " 用户未注册！");
             if(Strings.isNullOrEmpty(userEntity.getPassword())){

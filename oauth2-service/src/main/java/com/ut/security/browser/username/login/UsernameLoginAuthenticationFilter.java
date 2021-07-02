@@ -2,11 +2,11 @@ package com.ut.security.browser.username.login;
 
 
 import com.google.common.base.Strings;
-import com.ut.security.feign.FeignUserService;
 import com.ut.security.properties.SecurityConstants;
-import com.ut.security.rbac.MyUserEntity;
 import com.ut.security.support.AES_ECB_128_Service;
 import com.ut.security.support.SpringUtils;
+import com.ut.security.usermgr.MyUserEntity;
+import com.ut.security.usermgr.MyUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -44,13 +44,13 @@ public class UsernameLoginAuthenticationFilter extends AbstractAuthenticationPro
 		logger.info("===========web 端用户名密码 登录入口===========");
 		String username = obtainParameter(request, SecurityConstants.LOGIN_USERNAME);//用户名或登录名
 		String password = obtainParameter(request, SecurityConstants.LOGIN_PASSWORD);//密码
-		if(Strings.isNullOrEmpty(username)||Strings.isNullOrEmpty(password)){
+		if (Strings.isNullOrEmpty(username) || Strings.isNullOrEmpty(password)) {
 			throw new AuthenticationServiceException("username或password不能为空！");
 		}
 
-		FeignUserService feignUserService = SpringUtils.getBean(FeignUserService.class);
+		MyUserService myUserService = SpringUtils.getBean(MyUserService.class);
 		AES_ECB_128_Service aes = SpringUtils.getBean(AES_ECB_128_Service.class);
-		MyUserEntity userByUsernameOrLoginName = feignUserService.getUserByUsername(username, aes.getSecurityToken());
+		MyUserEntity userByUsernameOrLoginName = myUserService.getUserByUsername(username);
 		if (null == userByUsernameOrLoginName) {
 			throw new AuthenticationServiceException(username + " 用户未注册！");
 		}
